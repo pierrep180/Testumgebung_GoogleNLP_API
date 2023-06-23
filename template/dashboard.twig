@@ -1,0 +1,35 @@
+{% extends 'index.twig' %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block subTitle %}
+    Dashboard
+{% endblock %}
+
+
+{% block content %}
+    <form method="post" action='/urlToContent'>
+        <div class="mb-3">
+            <label class="form-label">Newsartikel-Text auf Entitäten analysieren:</label>
+            <textarea class="form-control" placeholder="URL hier..." id="floatingTextarea" rows="1"
+                      name="text" required>{{ LText }}</textarea>
+        </div>
+        <button class="btn btn-outline-secondary" type="submit">Inhalt abfragen</button>
+    </form>
+    <br>
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label">Texteingabe</label>
+            <textarea class="form-control" placeholder="Text hier..." id="floatingTextarea" rows="5"
+                      style="max-width: 50vw" name="text">{{ content }}</textarea>
+        </div>
+        <button class="btn btn-outline-secondary" type="submit" onclick="javascript: form.action='/sentiment';">
+            Sentimentanalyse Starten
+        </button>
+        <button class="btn btn-outline-secondary" type="submit" onclick="javascript:form.action='/entity'; ">
+            Entitätenanalyse Starten
+        </button>
+    </form>
+{% endblock %}

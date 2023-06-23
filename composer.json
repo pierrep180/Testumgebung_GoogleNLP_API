@@ -1,0 +1,30 @@
+{
+    "name": "tag24/google-nlp",
+    "description": "Google NLP Development Environment",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "GoogleNlp\\": "source/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Pierre Pinisch"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "slim/slim": "^4.11",
+        "google/cloud-language": "^0.30.0",
+        "twig/twig": "^3.0",
+        "slim/twig-view": "^3.3",
+        "google/apiclient": "^2.15",
+        "google/protobuf": "^3.17",
+      "ext-dom": "*",
+        "voku/simple_html_dom": "^4.8",
+        "voku/portable-utf8": "^6.0",
+        "ext-curl": "*",
+        "ext-libxml": "*"
+    }
+}

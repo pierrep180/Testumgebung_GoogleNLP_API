@@ -1,0 +1,61 @@
+{% extends 'index.twig' %}
+
+{% block title %}
+    Sentiment-Analyse
+{% endblock %}
+
+{% block subTitle %}
+    Sentiment-Analyse
+{% endblock %}
+{% block lead %}
+    Analysiert den vorgegebenen Text auf die emotionale Stimmung.
+{% endblock %}
+
+{% block content %}
+    <form method="post" action="/sentimentUrlToContent">
+        <div class="mb-3">
+            <label class="form-label">Newsartikel-Text auf Sentiment analysieren:</label>
+            <textarea class="form-control" placeholder="URL hier..." id="floatingTextarea" rows="1"
+                      name="text" required>{{ LText }}</textarea>
+        </div>
+        <button class="btn btn-outline-secondary" type="submit">Inhalt abfragen</button>
+    </form>
+    <br>
+    <form method="post" action="/sentiment">
+        <div class="mb-3">
+            <label class="form-label">Texteingabe:</label>
+            <textarea class="form-control" placeholder="Text hier..." id="floatingTextarea" rows="5"
+                      name="text" required>{{ content }}</textarea>
+        </div>
+        <button class="btn btn-outline-secondary" type="submit">Analyse Starten</button>
+    </form>
+
+    {% if sentences %}
+        <br>
+        <h4>Analysierter Text:</h4>
+        <p>{{ AText }}</p>
+        <br>
+        <h4>Sentiment vom gesamten Dokument:</h4>
+        <p>Sentiment-Score: {{ sentiment_score }}</p>
+        <p>Magnitude-Score: {{ magnitude_score }}</p>
+        <table class="table table-responsive-sm">
+            <thead>
+            <tr>
+                <th scope="col">Satz</th>
+                <th scope="col">Sentiment-Score</th>
+                <th scope="col">Magnitude-Score</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for sentence in sentences %}
+                <tr>
+                    <td>{{ sentence.text }}</td>
+                    <td>{{ sentence.sentiment.score }}</td>
+                    <td>{{ sentence.sentiment.magnitude }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+{% endblock %}

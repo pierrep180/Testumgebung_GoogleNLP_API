@@ -1,0 +1,60 @@
+{% extends 'index.twig' %}
+
+{% block title %}
+    Entitäten-Analyse
+{% endblock %}
+
+{% block subTitle %}
+    Entitäten-Analyse
+{% endblock %}
+{% block lead %}
+    Analysiert den vorgegebenen Text nach den Entitäten.
+{% endblock %}
+
+{% block content %}
+    <form method="post" action="/entityUrlToContent">
+        <div class="mb-3">
+            <label class="form-label">Newsartikel-Text auf Entitäten analysieren:</label>
+            <textarea class="form-control" placeholder="URL hier..." id="floatingTextarea" rows="1"
+                      name="text" required>{{ LText }}</textarea>
+        </div>
+        <button class="btn btn-outline-secondary" type="submit">Inhalt abfragen</button>
+    </form>
+    <br>
+    <form method="post" action="/entity">
+        <div class="mb-3">
+            <label class="form-label">Texteingabe:</label>
+            <textarea class="form-control" placeholder="Text hier..." id="floatingTextarea" rows="5"
+                      name="text">{{ content }}</textarea>
+        </div>
+        <button class="btn btn-outline-secondary" type="submit">Analyse Starten</button>
+    </form>
+    {% if (entities) %}
+        <br>
+        <h4>Analysierter Text:</h4>
+        <p>{{ AText }}</p>
+        <br>
+        <h4>{{ entityCount }} Gefundene Entitäten:</h4>
+        <table class="table table-responsive-sm">
+            <thead>
+            <tr>
+                <th scope="col">Entität</th>
+                <th scope="col">Entitätstyp</th>
+                <th scope="col">Salience-Score</th>
+                <th scope="col">Erwähnung Wikipedia</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {%for entity in entities %}
+                <tr>
+                    <td>{{ entity.name }}</td>
+                    <td>{{ entity.type }}</td>
+                    <td>{{ entity.salience }}</td>
+                    <td>{{ entity.metadata.wikipedia_url }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
